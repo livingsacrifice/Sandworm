@@ -49,4 +49,5 @@ Sandpeople escape the sandworm by exiting at one of the four corners of the dese
 Sandworm will occasionally enter tunneling mode (either by consuming a charge with FIRE button or by sandperson failing to sandwalk properly). While tunneling is active, sandpeople will move 15x slower than the sandworm and the screen will shake.
 ### Sandwalking: 
 Sandpeople will trigger a free tunnel by the sandworm if they engage in frequent or repetitious movements.
-### Awareness: In reverse 1P mode, the sandworm will gradually become more aware of the location of a sandperson, based on frequency of moves.
+### Awareness: 
+In reverse 1P mode, the sandworm will gradually become more aware of the location of a sandperson, based on frequency of moves.
