@@ -8,7 +8,7 @@ Atari 2600 Game
  Sandworm is an asymmetrical two-player game. Player 1 controls the sandworm and attempts to consume as many sandpeople as he can (similar to classic game, Snake). Player 2 controls the sandpeople, mastering the sandwalk while escaping to the corners of the desert. CPU will control movements for one of the players in 1P mode.
  
 ## [PLAY]
- Play using Stella emulator/core or via https://javatari.org
+ Load Sandworm.bin using Stella emulator/core or https://javatari.org
 
 ## [Objectives]
  ### 1.
