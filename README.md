@@ -12,7 +12,7 @@ Atari 2600 Game
 
 ## [Objectives]
  ### 1.
- Player 1 wins when sandworm reaches 99 segments in length ('99' will display in top-right)
+ Player 1 wins when sandworm reaches 128 segments in length ('C8' will display in top-right)
  ### 2. 
  Player 2 wins when 10 sandpeople successfully escape the sandworm ('A' will display in bottom-right)
  ### 3. 
