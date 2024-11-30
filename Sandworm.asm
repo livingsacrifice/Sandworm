@@ -94,7 +94,7 @@ GAME_OVER    	= %10000000
 ; flags for GameState 2: lower nibble tracks move count of person
 ; FIRE_PRESS => bit 4; ORA #$10 to set; AND #$EF to clear; one-shots fire button
 FIRE_PRESS		= %00010000
-MAX_SCORE 		= 99 ; can increase to ~200 if not using BCD
+MAX_SCORE 		= #$C8 ; increased to 128 from 99, represented as $C8
 
 ;===============================================================================
 ; Z P - V A R I A B L E S
@@ -441,7 +441,7 @@ DrawSprite
 			  sta COLUP0			; 3		27 
               inx					; 2		29
               inx					; 2		31   
-			  SLEEP 3				; 3		34
+			  SLEEP 3				; 3		34	precise timing required
 			  lda (SpritePtr1),y	; 5		39
               sta GRP1				; 3		42
               lda (SpritePtr0),y	; 5		47
@@ -953,9 +953,17 @@ Timeout       lda MotionDelay
 
 CheckLen      lda Score             
               cmp #MAX_SCORE       
-              bne CheckFruit        
+              bne CheckFruit 
+			  sta HiScore
+;			  jmp GameOver
+			  lda #WHITE
+			  sta COLUPF
               lda #0                
               sta NewDirection    ; Win!
+			  lda GameState
+              and #$FB		;clear enable joystick flag
+			  ora #$80		;set game over bit
+              sta GameState
 
 ;    lda FruitPosition ; if GS bit 0 = zero then we needto place the next fruit
 CheckFruit    lda GameState         
@@ -1466,7 +1474,7 @@ Move SUBROUTINE move
             bmi .collision_rep
 .down       iny
             cpy #16
-            beq .collision
+            beq .collision_rep
 .continue   jsr PackXY				; 2nd level
 			cmp TailPosition
 			bne .check_collision
@@ -1516,11 +1524,20 @@ Move SUBROUTINE move
             lda GameState
             and #$FE                ; clear fruit loaded
             sta GameState
-            sed                     ; increase score using BCD addition
-            clc
-            lda Score
-            adc #1
-            cld
+;            sed                     ; increase score using BCD addition
+;            clc
+;            lda Score
+;            adc #1
+;            cld
+			lda Score
+			jsr UnpackA
+			iny
+			cpy #10
+			bne .nocarry
+			ldy #0
+			inx
+.nocarry			
+			jsr PackXY
             sta Score
             and #$0F
             cmp #$05
