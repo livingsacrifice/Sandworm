@@ -429,26 +429,28 @@ ContinueWait
               lda #2				; 2		9
               sta NUSIZ0			; 3		12
               sta NUSIZ1			; 3		15
-DrawSprite			  
-              lda #DEFAULT_COLOR	; 2		46
-			  sta COLUP1			; 3		49
-			  sta COLUP0			; 3		52
-			  lda (SpritePtr3),y	; 5		57
-              sta GRP1				; 3		60 cycles x 8
+DrawSprite			
+
               sta WSYNC				; 3		3
-              lda (SpritePtr2),y	; 5		8
-              sta GRP0				; 3		11
-			  lda #TUNNEL_COLOR		; 2		13
-			  sta COLUP1			; 3		16
-			  sta COLUP0			; 3		19
-              lda (SpritePtr1),y	; 5		24
-              sta GRP1				; 3		27
-              lda (SpritePtr0),y	; 5		32
-              inx					; 2		34
-              inx					; 2		36
-              dey					; 2		38
-              sta GRP0				; 3		41
-              bpl DrawSprite		; 3		44
+              lda (SpritePtr3),y	; 5		8
+              sta GRP1				; 3		11
+              lda (SpritePtr2),y	; 5		16
+              sta GRP0				; 3		19
+			  lda #TUNNEL_COLOR		; 2		21
+			  sta COLUP1			; 3		24
+			  sta COLUP0			; 3		27 
+              inx					; 2		29
+              inx					; 2		31   
+			  SLEEP 3				; 3		34
+			  lda (SpritePtr1),y	; 5		39
+              sta GRP1				; 3		42
+              lda (SpritePtr0),y	; 5		47
+              sta GRP0				; 3		50
+			  lda #DEFAULT_COLOR	; 2		52
+			  sta COLUP1			; 3		55
+			  sta COLUP0			; 3		58
+              dey					; 2		60 
+              bpl DrawSprite		; 3		63
 
 RunCode
               ; 5 scan lines to position game sprites	#28 total
